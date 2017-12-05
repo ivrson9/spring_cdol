@@ -6,7 +6,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
-import com.cdol.template.constents.dao.ContentsDAO;
+import com.cdol.template.contents.dao.ContentsDAO;
 import com.cdol.template.contents.dto.ContentsVO;
 
 @Service

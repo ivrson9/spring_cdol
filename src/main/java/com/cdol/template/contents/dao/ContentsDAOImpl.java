@@ -1,4 +1,4 @@
-package com.cdol.template.constents.dao;
+package com.cdol.template.contents.dao;
 
 import java.util.List;
 
