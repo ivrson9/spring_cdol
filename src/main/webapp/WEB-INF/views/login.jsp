@@ -16,11 +16,11 @@
 					type: 'post',
 					success: function (result) {
 						$('#myModal').addClass("in");
-						if(result.login){
-							$('#myModal').find('#modalMessage').html(result.redirect);
+						if(result != null){
+							$('#myModal').find('#modalMessage').html("Good");
 							$('#myModal').on('hide.bs.modal', function(e){
 								// 이전페이지로
-								window.location.href = '';
+								window.location.href = result.returnURL;
 							});
 						} else {
 							$('#myModal').find('#modalMessage').html("asd");
@@ -40,7 +40,7 @@
 
 		<form class="form-signin" id="feedInput" name="feedInput">
 		<!-- action="/user/authentication<?=empty($returnURL) ? '' : '?returnURL='.rawurlencode($returnURL) ?>" method="POST"> -->
-			<input type="hidden" name="returnURL" id="returnURL" value="user/login"/>
+			<input type="hidden" name="returnURL" id="returnURL" value="${returnURL}"/>
 			<h2 class="form-signin-heading">Please sign in</h2>
 
 			<label for="inputEmail" class="sr-only">Email address</label>

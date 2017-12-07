@@ -62,7 +62,7 @@
 					<c:choose>
 					<c:when test="${not empty sessionScope.user}">
 					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?=$this->session->userdata('name')?> <b class="caret"></b></a>
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> ${sessionScope.user.name} <b class="caret"></b></a>
 						<ul class="dropdown-menu">
 							<li>
 								<a href="/user/profile"><i class="fa fa-fw fa-user"></i> Profile</a>

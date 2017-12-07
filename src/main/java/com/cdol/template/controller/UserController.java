@@ -1,9 +1,14 @@
 package com.cdol.template.controller;
 
+import java.io.IOException;
 import java.util.Locale;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -11,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.cdol.template.user.dto.UserVO;
 import com.cdol.template.user.service.UserService;
@@ -31,8 +37,14 @@ public class UserController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "login", method = RequestMethod.GET)
-	public String login(Locale locale, Model model) {
-		return "login";
+	public ModelAndView login(HttpServletRequest request) {
+		String returnURL = request.getHeader("REFERER");
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("returnURL", returnURL);
+		mav.setViewName("login");
+		
+		return mav;
 	}
 	
 	@RequestMapping(value = "signup")
@@ -40,8 +52,32 @@ public class UserController {
 		return "register";
 	}
 	
+	
+//	@ResponseBody UserVO
+	@RequestMapping(value = "authentication", method = RequestMethod.POST)
+	public void authentication(@ModelAttribute UserVO vo, HttpSession session, 
+								HttpServletRequest request, HttpServletResponse response) {
+		ObjectMapper mapper = new ObjectMapper();
+		UserVO resultVo = userService.authentication(vo, session, request);
+		
+		try {
+			resultVo.setReturnURL(vo.getReturnURL());
+			response.getWriter().print(mapper.writeValueAsString(resultVo));
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+	}
+	
 	@RequestMapping(value = "register", method = RequestMethod.POST)
-	public void register(@ModelAttribute UserVO vo) {
+	public String register(@ModelAttribute UserVO vo) {
 		userService.insertUser(vo);
+		return "redirect:/";
+	}
+	
+	@RequestMapping(value = "logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		
+		return "redirect:/";
 	}
 }

@@ -3,9 +3,11 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/context/spring-mvc.xsd">
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
@@ -36,6 +38,19 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.cdol.template" />
+	
+	<mvc:interceptors> 
+		<mvc:interceptor> 
+			<mvc:mapping path="/boadr_write"/>
+			<!--  -->
+			<beans:bean class="com.cdol.template.util.Interceptor"/> 
+		</mvc:interceptor>
+		<!-- 추가로 여러개의 인터셉터 설정 가능 
+		<mvc:interceptor> 
+			<mvc:mapping path="/admin/board_write"/> 
+			<bean class="com.spring.interceptor.AdminInterCeptor"/> 
+		</mvc:interceptor> --> 
+	</mvc:interceptors>
 
 	
 </beans:beans>
