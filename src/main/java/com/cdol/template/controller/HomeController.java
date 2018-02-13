@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
- * Handles requests for the application home page.
+ * HomeController class
+ * 
+ * @author wonsuk Cha
  */
 @Controller
 public class HomeController {

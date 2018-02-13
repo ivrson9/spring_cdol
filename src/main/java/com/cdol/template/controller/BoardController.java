@@ -21,7 +21,9 @@ import com.cdol.template.board.dto.BoardVO;
 import com.cdol.template.board.service.BoardService;
 
 /**
- * Handles requests for the application home page.
+ * BoardController class
+ * 
+ * @author wonsuk Cha
  */
 @Controller
 @RequestMapping("/board/*")
@@ -33,10 +35,16 @@ public class BoardController {
 	BoardService boardService;
 	
 	/**
-	 * Simply selects the home view to render by returning its name.
+	 * list view page
+	 * 
+	 * @param String - board name
+	 * @param int - pagination number
+	 * @param String - search type
+	 * @param String - search contents
+	 * @return ModelAndView
 	 */
 	@RequestMapping(value = "/lists/{boardName}", method = RequestMethod.GET)
-	public ModelAndView home(@PathVariable String boardName, 
+	public ModelAndView list(@PathVariable String boardName, 
 							@RequestParam(value="cnt", defaultValue = "1") int list_num,
 							@RequestParam(value="search_type", defaultValue = "") String search_type,
 							@RequestParam(value="search_cont", defaultValue = "") String search_cont) {

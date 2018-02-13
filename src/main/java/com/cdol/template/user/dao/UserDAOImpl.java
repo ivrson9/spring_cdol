@@ -6,6 +6,11 @@ import org.springframework.stereotype.Repository;
 
 import com.cdol.template.user.dto.UserVO;
 
+/**
+ * UserRepository implementation
+ * 
+ * @author wonsuk Cha
+ */
 @Repository
 public class UserDAOImpl implements UserDAO {
 	

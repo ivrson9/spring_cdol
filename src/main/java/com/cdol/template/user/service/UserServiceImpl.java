@@ -11,6 +11,11 @@ import org.springframework.stereotype.Service;
 import com.cdol.template.user.dao.UserDAO;
 import com.cdol.template.user.dto.UserVO;
 
+/**
+ * UserService implementation
+ * 
+ * @author wonsuk Cha
+ */
 @Service
 public class UserServiceImpl implements UserService {
 
